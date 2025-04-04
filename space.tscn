@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=3 uid="uid://wh4dg0ukv1t8"]
+
+[ext_resource type="Script" path="res://scripts/command_input.gd" id="1_dlyaf"]
+[ext_resource type="Script" path="res://scripts/controlled_ship.gd" id="1_n351m"]
+[ext_resource type="Script" path="res://scripts/command_output.gd" id="2_fu4di"]
+[ext_resource type="Script" path="res://scripts/helpers/fixed_rotation.gd" id="4_lb7ku"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3o8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wi5f"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uyv1"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kihxw"]
+size = Vector2(106, 45)
+
+[node name="Space" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CommandInput" type="LineEdit" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -65.0
+offset_right = 510.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/caret_width = 5
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q3o8p")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0wi5f")
+alignment = 2
+max_length = 50
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+caret_blink_interval = 0.4
+script = ExtResource("1_dlyaf")
+
+[node name="CommandOutput" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -131.0
+offset_right = 510.0
+offset_bottom = -76.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_5uyv1")
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("2_fu4di")
+
+[node name="Ship" type="RigidBody2D" parent="."]
+position = Vector2(934, 340)
+rotation = -6.28319
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_n351m")
+
+[node name="Model" type="Polygon2D" parent="Ship"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-50, -20, 50, -20, 50, 20, -50, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_kihxw")
+
+[node name="Camera2D" type="Camera2D" parent="Ship"]
+rotation = 1.5708
+ignore_rotation = false
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.6
+drag_top_margin = 0.6
+drag_right_margin = 0.6
+drag_bottom_margin = 0.6
+script = ExtResource("4_lb7ku")
+target_rotation = 90.0
+
+[connection signal="command_entered" from="CanvasLayer/CommandInput" to="CanvasLayer/CommandOutput" method="_on_command_entered"]
+[connection signal="command_entered" from="CanvasLayer/CommandInput" to="Ship" method="_on_command_entered"]
