@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://wh4dg0ukv1t8"]
+[gd_scene format=3 uid="uid://wh4dg0ukv1t8"]
 
-[ext_resource type="Script" path="res://scripts/command_input.gd" id="1_dlyaf"]
-[ext_resource type="Script" path="res://scripts/controlled_ship.gd" id="1_n351m"]
-[ext_resource type="Script" path="res://scripts/command_output.gd" id="2_fu4di"]
-[ext_resource type="Script" path="res://scripts/helpers/fixed_rotation.gd" id="4_lb7ku"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3o8p"]
+[ext_resource type="Script" uid="uid://br0o6sg2wdw3k" path="res://scripts/command_input.gd" id="1_dlyaf"]
+[ext_resource type="Script" uid="uid://b4hityntli7fd" path="res://scripts/controlled_ship.gd" id="1_n351m"]
+[ext_resource type="Script" uid="uid://dswlwbvyutrul" path="res://scripts/command_output.gd" id="2_fu4di"]
+[ext_resource type="Script" uid="uid://704u1ld2f66r" path="res://scripts/helpers/fixed_rotation.gd" id="4_lb7ku"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wi5f"]
 border_width_left = 10
@@ -18,6 +16,8 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3o8p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uyv1"]
 border_width_left = 10
@@ -34,12 +34,12 @@ corner_radius_bottom_left = 5
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kihxw"]
 size = Vector2(106, 45)
 
-[node name="Space" type="Node2D"]
+[node name="Space" type="Node2D" unique_id=386376392]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=585670560]
 
-[node name="CommandInput" type="LineEdit" parent="CanvasLayer"]
-anchors_preset = 2
+[node name="CommandInput" type="LineEdit" parent="CanvasLayer" unique_id=507731684]
+anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
@@ -47,11 +47,11 @@ offset_top = -65.0
 offset_right = 510.0
 offset_bottom = -10.0
 grow_vertical = 0
-theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_constants/caret_width = 5
-theme_override_styles/focus = SubResource("StyleBoxEmpty_q3o8p")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0wi5f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q3o8p")
 alignment = 2
 max_length = 50
 context_menu_enabled = false
@@ -63,14 +63,14 @@ caret_blink = true
 caret_blink_interval = 0.4
 script = ExtResource("1_dlyaf")
 
-[node name="CommandOutput" type="Label" parent="CanvasLayer"]
-anchors_preset = 2
+[node name="CommandOutput" type="Label" parent="CanvasLayer" unique_id=1460517017]
+anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -131.0
+offset_top = -130.0
 offset_right = 510.0
-offset_bottom = -76.0
+offset_bottom = -75.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_5uyv1")
@@ -79,7 +79,7 @@ vertical_alignment = 1
 uppercase = true
 script = ExtResource("2_fu4di")
 
-[node name="Ship" type="RigidBody2D" parent="."]
+[node name="Ship" type="RigidBody2D" parent="." unique_id=1405959099]
 position = Vector2(934, 340)
 rotation = -6.28319
 gravity_scale = 0.0
@@ -87,15 +87,15 @@ can_sleep = false
 lock_rotation = true
 script = ExtResource("1_n351m")
 
-[node name="Model" type="Polygon2D" parent="Ship"]
+[node name="Model" type="Polygon2D" parent="Ship" unique_id=355639387]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-50, -20, 50, -20, 50, 20, -50, 20)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship" unique_id=1111206517]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_kihxw")
 
-[node name="Camera2D" type="Camera2D" parent="Ship"]
+[node name="Camera2D" type="Camera2D" parent="Ship" unique_id=1794742666]
 rotation = 1.5708
 ignore_rotation = false
 position_smoothing_enabled = true
