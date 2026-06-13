@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="code-space"
@@ -15,10 +19,14 @@ run/main_scene="res://space.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Events="*uid://lj4133q5q4iv"
+
 [display]
 
-window/size/viewport_width=1728
-window/size/viewport_height=972
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 
 [dotnet]

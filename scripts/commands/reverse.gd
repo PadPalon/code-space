@@ -1,22 +1,12 @@
 class_name Reverse extends Command
 
+var previous_rotation
 var target_rotation
+var rotation_done = 0
 
-func get_text():
-	return "REVERSE"
-
-func start(ship: RigidBody2D, delta: float):
-	target_rotation = RotationUtils.to_360(ship.global_rotation_degrees + 180)
-	
-	ship.lock_rotation = false
-
-func run(ship: RigidBody2D, delta: float):
-	ship.apply_torque(100)
-
-func is_finished(ship: RigidBody2D, delta: float):
-	var current = RotationUtils.to_360(ship.global_rotation_degrees)
-	var rotation_reached = current == target_rotation
-	if rotation_reached:
-		ship.global_rotation_degrees = RotationUtils.to_180(target_rotation)
-		ship.lock_rotation = true
-	return rotation_reached
+static func build(arguments: Array[String]):
+	if arguments.is_empty():
+		return Turn.new("left", 180)
+	else:
+		arguments.append("180")
+		return Turn.build(arguments)

@@ -15,13 +15,21 @@ Think "Captain shouting orders to the officers" and "Execute battleplan Super-Om
   - rotate away from the current velocity vector
 - turn l | turn left
   - turn left by 45 degress
-- turn left X
+- turn l X | left X
   - turn left by X degress
 - turn r | turn right
   - turn right by 45 degress
-- turn right X
+- turn r X | right X
   - turn right by X degress
 - reverse
   - turn around 180 degrees
+- spin l | spin left
+  - spin left for 1 second
+- spin l X | spin left X
+  - spin left for X second
+- spin r | spin right
+  - spin right for 1 second
+- spin r X | spin right X
+  - spin right for X second
 - execute
   - run commands

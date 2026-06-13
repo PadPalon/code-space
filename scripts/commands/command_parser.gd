@@ -1,19 +1,30 @@
 class_name CommandParser
 
-static func parse(to_parse: String):
+static func parse(to_parse: String) -> Array[Command]:
 	var parts = to_parse.split(" ")
 	var command = parts[0].to_lower()
 	var arguments = parts.slice(1)
+	var parsed
 	match command.to_lower():
 		"turn":
-			return Turn.new(arguments)
+			parsed = Turn.build(arguments)
 		"thrust":
-			return Thrust.new(arguments)
+			parsed = Thrust.build(arguments)
 		"reverse":
-			return Reverse.new()
+			parsed = Reverse.build(arguments)
 		"rotate":
-			return Rotate.new(arguments)
+			parsed = Rotate.build(arguments)
+		"spin":
+			parsed = Spin.build(arguments)
 		"execute":
-			return Execute.new()
-		_:
-			return null
+			parsed = Execute.build(arguments)
+		"stop-spin":
+			parsed = StopSpin.build(arguments)
+		var unknown_command:
+			ConsoleHelper.send_message("Unknown command " + unknown_command)
+	if parsed is Array[Command]:
+		return parsed
+	elif parsed is Command:
+		return [parsed] as Array[Command]
+	else:
+		return [] as Array[Command]

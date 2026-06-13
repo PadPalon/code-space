@@ -1,11 +1,11 @@
-extends LineEdit
-
-signal command_entered(command: Command)
+class_name CommandInput extends LineEdit
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ENTER:
-			var parsed = CommandParser.parse(text)
-			if parsed:
-				command_entered.emit(parsed)
-			text = ""
+			grab_focus()
+			if text != "":
+				var parsed: Array[Command] = CommandParser.parse(text)
+				if !parsed.is_empty():
+					Events.emit_signal("command_entered", parsed)
+				text = ""
