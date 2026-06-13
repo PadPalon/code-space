@@ -2,9 +2,11 @@ extends Label
 
 var previous_command_text = ""
 
+
 func _ready() -> void:
 	Events.connect("command_entered", _on_command_entered)
 	Events.connect("console_message_sent", _on_message_sent)
+
 
 func _on_command_entered(commands: Array[Command]):
 	text = previous_command_text
@@ -17,6 +19,7 @@ func _on_command_entered(commands: Array[Command]):
 			else:
 				text = text + "\n" + command.get_text()
 	previous_command_text = text
+
 
 func _on_message_sent(message: String):
 	text = previous_command_text

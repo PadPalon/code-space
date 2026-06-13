@@ -8,11 +8,13 @@ static func to_360(rotation: float):
 	else:
 		return int(rotation)
 
+
 static func to_180(rotation: int):
 	if rotation > 180:
 		return (360 - rotation) * -1
 	else:
 		return rotation
+
 
 static func distance_left(source: int, target: int):
 	if target < source:
@@ -21,6 +23,7 @@ static func distance_left(source: int, target: int):
 		return 360 - distance_right(source, target)
 	else:
 		return 0
+
 
 static func distance_right(source: int, target: int):
 	if target < source:

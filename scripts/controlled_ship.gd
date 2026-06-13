@@ -6,9 +6,11 @@ var executing_command: Command
 
 var stats: ShipStats
 
+
 func _ready() -> void:
 	Events.connect("command_entered", _on_command_entered)
 	stats = ShipStats.new(10, 300)
+
 
 func _on_command_entered(commands: Array[Command]):
 	for command in commands:
@@ -20,6 +22,7 @@ func _on_command_entered(commands: Array[Command]):
 			pending_commands.clear()
 		else:
 			pending_commands.append(command)
+
 
 func _physics_process(delta: float):
 	if not executing_command and not executing_commands.is_empty():

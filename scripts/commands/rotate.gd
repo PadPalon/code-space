@@ -1,4 +1,5 @@
-class_name Rotate extends Command
+class_name Rotate
+extends Command
 
 var string_direction
 var direction
@@ -16,6 +17,7 @@ static var prograde_alias = [PROGRADE, "pro"]
 static var LEFT_SPEED = -1
 static var RIGHT_SPEED = 1
 
+
 static func build(arguments: Array[String]):
 	var commands: Array[Command] = []
 	if arguments.size() >= 1:
@@ -29,6 +31,7 @@ static func build(arguments: Array[String]):
 		ConsoleHelper.send_message("No rotation target")
 	return commands
 
+
 static func get_string_direction(direction_argument: String):
 	direction_argument = direction_argument.to_lower()
 	if direction_argument in retrograde_alias:
@@ -36,6 +39,7 @@ static func get_string_direction(direction_argument: String):
 	if direction_argument in prograde_alias:
 		return PROGRADE
 	return null
+
 
 func _init(direction_argument: String):
 	if direction_argument.is_valid_int():
@@ -50,6 +54,7 @@ func _init(direction_argument: String):
 
 func get_text():
 	return "ROTATE TO " + (string_direction if string_direction else str((target_rotation + 90) % 360))
+
 
 func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
 	if string_direction == RETROGRADE:
@@ -69,6 +74,7 @@ func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
 
 	ship.lock_rotation = false
 
+
 func run(ship: RigidBody2D, _delta: float, stats: ShipStats):
 	var torque
 	if rotation_done > rotation_to_do * 0.5 + 1:
@@ -77,6 +83,7 @@ func run(ship: RigidBody2D, _delta: float, stats: ShipStats):
 		torque = speed * stats.rotation_speed
 
 	ship.apply_torque(torque)
+
 
 func is_finished(ship: RigidBody2D, delta: float, stats: ShipStats):
 	var current_rotation = ship.global_rotation_degrees
