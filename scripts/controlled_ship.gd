@@ -37,5 +37,3 @@ func _physics_process(delta: float):
 				ConsoleHelper.send_message("Finished executing")
 		else:
 			executing_command.run(self, delta, stats)
-
-	pass

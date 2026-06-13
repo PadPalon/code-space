@@ -10,8 +10,7 @@ static func build(arguments: Array[String]):
 		return Thrust.new(1)
 	if arguments.size() >= 1 and arguments[0].is_valid_int():
 		return Thrust.new(int(arguments[0]))
-	else:
-		ConsoleHelper.send_message("Invalid thrust duration" + arguments[0])
+	ConsoleHelper.send_message("Invalid thrust duration" + arguments[0])
 	return []
 
 

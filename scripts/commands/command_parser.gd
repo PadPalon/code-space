@@ -24,7 +24,6 @@ static func parse(to_parse: String) -> Array[Command]:
 			ConsoleHelper.send_message("Unknown command " + unknown_command)
 	if parsed is Array[Command]:
 		return parsed
-	elif parsed is Command:
+	if parsed is Command:
 		return [parsed] as Array[Command]
-	else:
-		return [] as Array[Command]
+	return [] as Array[Command]

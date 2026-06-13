@@ -9,13 +9,13 @@ var speed
 
 var burn_time = 0
 
-static var LEFT = "left"
-static var RIGHT = "right"
-static var left_alias = ["l", LEFT]
-static var right_alias = ["r", RIGHT]
+static var left_direction = "left"
+static var right_direction = "right"
+static var left_alias = ["l", left_direction]
+static var right_alias = ["r", right_direction]
 
-static var LEFT_SPEED = -1
-static var RIGHT_SPEED = 1
+static var left_speed = -1
+static var right_speed = 1
 
 
 static func build(arguments: Array[String]):
@@ -26,8 +26,7 @@ static func build(arguments: Array[String]):
 				return Spin.new(direction_argument)
 			if arguments.size() >= 2 and arguments[1].is_valid_int():
 				return Spin.new(direction_argument, int(arguments[1]))
-			else:
-				ConsoleHelper.send_message("Unknown spin duration " + arguments[1])
+			ConsoleHelper.send_message("Unknown spin duration " + arguments[1])
 		else:
 			ConsoleHelper.send_message("Unknown spin direction " + arguments[0])
 	else:
@@ -38,9 +37,9 @@ static func build(arguments: Array[String]):
 static func get_direction(direction_argument: String):
 	direction_argument = direction_argument.to_lower()
 	if direction_argument in left_alias:
-		return LEFT
-	elif direction_argument in right_alias:
-		return RIGHT
+		return left_direction
+	if direction_argument in right_alias:
+		return right_direction
 	return null
 
 
@@ -54,10 +53,10 @@ func get_text():
 
 
 func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
-	if direction == LEFT:
-		speed = LEFT_SPEED
-	elif direction == RIGHT:
-		speed = RIGHT_SPEED
+	if direction == left_direction:
+		speed = left_speed
+	elif direction == right_direction:
+		speed = right_speed
 
 	ship.lock_rotation = false
 

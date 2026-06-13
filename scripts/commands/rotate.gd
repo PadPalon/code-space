@@ -9,13 +9,13 @@ var speed
 var rotation_to_do = 0
 var rotation_done = 0
 
-static var RETROGRADE = "retrograde"
-static var retrograde_alias = [RETROGRADE, "retro"]
-static var PROGRADE = "prograde"
-static var prograde_alias = [PROGRADE, "pro"]
+static var retro_grade = "retrograde"
+static var retrograde_alias = [retro_grade, "retro"]
+static var pro_grade = "prograde"
+static var prograde_alias = [pro_grade, "pro"]
 
-static var LEFT_SPEED = -1
-static var RIGHT_SPEED = 1
+static var left_speed = -1
+static var right_speed = 1
 
 
 static func build(arguments: Array[String]):
@@ -35,9 +35,9 @@ static func build(arguments: Array[String]):
 static func get_string_direction(direction_argument: String):
 	direction_argument = direction_argument.to_lower()
 	if direction_argument in retrograde_alias:
-		return RETROGRADE
+		return retro_grade
 	if direction_argument in prograde_alias:
-		return PROGRADE
+		return pro_grade
 	return null
 
 
@@ -47,29 +47,30 @@ func _init(direction_argument: String):
 	else:
 		string_direction = direction_argument.to_lower()
 		if string_direction in retrograde_alias:
-			string_direction = RETROGRADE
+			string_direction = retro_grade
 		if string_direction in prograde_alias:
-			string_direction = PROGRADE
+			string_direction = pro_grade
 
 
 func get_text():
-	return "ROTATE TO " + (string_direction if string_direction else str((target_rotation + 90) % 360))
+	var target = string_direction if string_direction else str((target_rotation + 90) % 360)
+	return "ROTATE TO " + target
 
 
 func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
-	if string_direction == RETROGRADE:
+	if string_direction == retro_grade:
 		target_rotation = RotationUtils.to_360(rad_to_deg(ship.linear_velocity.angle()) + 180)
-	elif string_direction == PROGRADE:
+	elif string_direction == pro_grade:
 		target_rotation = RotationUtils.to_360(rad_to_deg(ship.linear_velocity.angle()))
 
 	previous_rotation = RotationUtils.to_360(ship.global_rotation_degrees)
 	var distance_left = RotationUtils.distance_left(previous_rotation, target_rotation)
 	var distance_right = RotationUtils.distance_right(previous_rotation, target_rotation)
 	if distance_left > distance_right:
-		speed = RIGHT_SPEED
+		speed = right_speed
 		rotation_to_do = distance_right
 	else:
-		speed = LEFT_SPEED
+		speed = left_speed
 		rotation_to_do = distance_left
 
 	ship.lock_rotation = false
@@ -88,7 +89,9 @@ func run(ship: RigidBody2D, _delta: float, stats: ShipStats):
 func is_finished(ship: RigidBody2D, delta: float, stats: ShipStats):
 	var current_rotation = ship.global_rotation_degrees
 
-	var difference = maxf(current_rotation, previous_rotation) - minf(current_rotation, previous_rotation)
+	var max_rotation = maxf(current_rotation, previous_rotation)
+	var min_rotation = minf(current_rotation, previous_rotation)
+	var difference = max_rotation - min_rotation
 	previous_rotation = current_rotation
 	if difference > 180:
 		difference = absf(difference - 360)
