@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bbhfy8h3enf0l"]
+
+[node name="square_debris" type="RigidBody2D" unique_id=1050241971]
+gravity_scale = 0.0
+
+[node name="model" type="Polygon2D" parent="." unique_id=1146352324]
+color = Color(0.68, 0, 0, 1)
+polygon = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)
+
+[node name="collision" type="CollisionPolygon2D" parent="." unique_id=947060174]
+polygon = PackedVector2Array(-30, -30, 30, -30, 30, 30, -30, 30)

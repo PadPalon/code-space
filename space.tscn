@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://br0o6sg2wdw3k" path="res://scripts/command_input.gd" id="1_dlyaf"]
 [ext_resource type="Script" uid="uid://b4hityntli7fd" path="res://scripts/controlled_ship.gd" id="1_n351m"]
 [ext_resource type="Script" uid="uid://dswlwbvyutrul" path="res://scripts/command_output.gd" id="2_fu4di"]
+[ext_resource type="PackedScene" uid="uid://bbhfy8h3enf0l" path="res://debris/debris.tscn" id="4_rxlph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wi5f"]
 border_width_left = 10
@@ -29,9 +30,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kihxw"]
-size = Vector2(106, 45)
 
 [node name="Space" type="Node2D" unique_id=386376392]
 
@@ -91,10 +89,6 @@ script = ExtResource("1_n351m")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-50, -20, 50, -15, 50, 15, -50, 20)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship" unique_id=1111206517]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_kihxw")
-
 [node name="Camera2D" type="Camera2D" parent="Ship" unique_id=1794742666]
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -105,12 +99,26 @@ drag_top_margin = 0.6
 drag_right_margin = 0.6
 drag_bottom_margin = 0.6
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1456006769]
-position = Vector2(52, -90)
-color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(-20, -20, -20, 20, 20, 20, 20, -20)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship" unique_id=1390823312]
+polygon = PackedVector2Array(-50, -20, 50, -15, 50, 15, -50, 20)
 
-[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=620792558]
-position = Vector2(236, 184)
-color = Color(0, 0, 1, 1)
-polygon = PackedVector2Array(-20, -20, -20, 20, 20, 20, 20, -20)
+[node name="square_debris" parent="." unique_id=1050241971 instance=ExtResource("4_rxlph")]
+position = Vector2(-72, -62)
+
+[node name="square_debris2" parent="." unique_id=358937931 instance=ExtResource("4_rxlph")]
+position = Vector2(-169, 91)
+
+[node name="square_debris3" parent="." unique_id=49674843 instance=ExtResource("4_rxlph")]
+position = Vector2(52, 158)
+
+[node name="square_debris4" parent="." unique_id=708257272 instance=ExtResource("4_rxlph")]
+position = Vector2(96, -62)
+
+[node name="square_debris5" parent="." unique_id=1036789112 instance=ExtResource("4_rxlph")]
+position = Vector2(318, -229)
+
+[node name="square_debris6" parent="." unique_id=1384141357 instance=ExtResource("4_rxlph")]
+position = Vector2(-71, 178)
+
+[node name="square_debris7" parent="." unique_id=1624791265 instance=ExtResource("4_rxlph")]
+position = Vector2(281, 106)
