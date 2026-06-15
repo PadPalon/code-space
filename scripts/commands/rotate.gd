@@ -19,17 +19,14 @@ static var right_speed = 1
 
 
 static func build(arguments: Array[String]):
-	var commands: Array[Command] = []
 	if arguments.size() >= 1:
 		var argument = arguments[0]
 		if (argument.is_valid_int() or get_string_direction(argument)):
-			commands.append(StopSpin.new())
-			commands.append(Rotate.new(argument))
-		else:
-			ConsoleHelper.send_message("Invalid rotation target " + argument)
+			return [StopSpin.new(), Rotate.new(argument)] as Array[Command]
+		ConsoleHelper.send_message("Invalid rotation target " + argument)
 	else:
 		ConsoleHelper.send_message("No rotation target")
-	return commands
+	return null
 
 
 static func get_string_direction(direction_argument: String):
