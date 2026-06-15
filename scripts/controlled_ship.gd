@@ -15,11 +15,9 @@ func _ready() -> void:
 func _on_command_entered(commands: Array[Command]):
 	for command in commands:
 		if command.is_final():
-			command.run_final()
-			executing_command = null
-			executing_commands.clear()
-			executing_commands.append_array(pending_commands)
-			pending_commands.clear()
+			var stop_executing: bool = command.run_final(pending_commands, executing_commands)
+			if stop_executing:
+				executing_command = null
 		else:
 			pending_commands.append(command)
 

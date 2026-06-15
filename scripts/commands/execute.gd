@@ -9,5 +9,8 @@ func get_text():
 	return "EXECUTE"
 
 
-func run_final():
-	pass
+func run_final(pending_commands: Array[Command], executing_commands: Array[Command]):
+	executing_commands.clear()
+	executing_commands.append_array(pending_commands)
+	pending_commands.clear()
+	return true
