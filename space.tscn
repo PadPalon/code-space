@@ -83,6 +83,8 @@ rotation = -6.28319
 gravity_scale = 0.0
 can_sleep = false
 lock_rotation = true
+linear_damp = 0.02
+angular_damp = 0.02
 script = ExtResource("1_n351m")
 
 [node name="Model" type="Polygon2D" parent="Ship" unique_id=355639387]
