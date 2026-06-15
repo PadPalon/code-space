@@ -25,8 +25,8 @@ Events="*uid://lj4133q5q4iv"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1440
+window/size/viewport_height=810
 window/stretch/mode="canvas_items"
 
 [dotnet]
