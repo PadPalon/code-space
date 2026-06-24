@@ -34,6 +34,15 @@ static func build(arguments: Array[String]):
 	return []
 
 
+static func get_help():
+	return (
+			"starts spinning in given direction\n"
+			+ "does not slow down at the end of the spin\n"
+			+ "[left | l | right | r], direction to spin\n"
+			+ "[<number>], duration to spin"
+	)
+
+
 static func get_direction(direction_argument: String):
 	direction_argument = direction_argument.to_lower()
 	if direction_argument in left_alias:

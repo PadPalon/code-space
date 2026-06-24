@@ -4,6 +4,10 @@ static func build(_arguments: Array[String]):
 	return []
 
 
+static func get_help():
+	pass
+
+
 func is_final():
 	return has_method("run_final")
 

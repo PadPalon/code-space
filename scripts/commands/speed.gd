@@ -16,6 +16,14 @@ static func build(arguments: Array[String]):
 	return null
 
 
+static func get_help():
+	return (
+			"tries to reach a given speed by thrusting\n"
+			+ "aborts if speed is changing in wrong direction\n"
+			+ "[<number>], speed to reach"
+	)
+
+
 func _init(speed: float):
 	target_speed = speed
 

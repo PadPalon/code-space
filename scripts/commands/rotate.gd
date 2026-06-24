@@ -29,6 +29,14 @@ static func build(arguments: Array[String]):
 	return null
 
 
+static func get_help():
+	return (
+			"rotates to a direction\n"
+			+ "[retrograde | retro | prograde | pro | <number>],"
+			+ "where to turn, degrees absolute to screen"
+	)
+
+
 static func get_string_direction(direction_argument: String):
 	direction_argument = direction_argument.to_lower()
 	if direction_argument in retrograde_alias:

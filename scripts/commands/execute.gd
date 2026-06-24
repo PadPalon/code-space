@@ -5,6 +5,10 @@ static func build(_arguments: Array[String]):
 	return Execute.new()
 
 
+static func get_help():
+	return "starts executing any pending commands"
+
+
 func get_text():
 	return "EXECUTE"
 

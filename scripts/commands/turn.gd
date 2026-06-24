@@ -33,6 +33,15 @@ static func build(arguments: Array[String]):
 	return []
 
 
+static func get_help():
+	return (
+			"turns some degrees in a direction\n"
+			+ "does not slow down at the end of the thrust\n"
+			+ "[left | l | right | r], direction to turn\n"
+			+ "[<number>], degrees to turn, defaults to 90"
+	)
+
+
 static func get_direction(direction_argument: String):
 	direction_argument = direction_argument.to_lower()
 	if direction_argument in left_alias:
@@ -91,4 +100,4 @@ func is_finished(ship: RigidBody2D, _delta: float, _stats: ShipStats):
 
 
 func get_distance():
-	return distance if distance else 45
+	return distance if distance else 90

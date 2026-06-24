@@ -5,6 +5,10 @@ static func build(_arguments: Array[String]):
 	return Abort.new()
 
 
+static func get_help():
+	return "stops any running commands"
+
+
 func get_text():
 	return "ABORT"
 

@@ -5,6 +5,10 @@ static func build(_arguments: Array[String]):
 	return StopSpin.new()
 
 
+static func get_help():
+	return "stops any angular velocity"
+
+
 func get_text():
 	return "STOP SPIN"
 

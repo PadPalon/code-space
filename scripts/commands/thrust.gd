@@ -14,6 +14,14 @@ static func build(arguments: Array[String]):
 	return []
 
 
+static func get_help():
+	return (
+			"thrusts forwards for a given duration\n"
+			+ "does not slow down at the end of the thrust\n"
+			+ "[<number>], duration to thrust"
+	)
+
+
 func _init(duration_argument: int):
 	target_burn = duration_argument
 

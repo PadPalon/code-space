@@ -5,6 +5,10 @@ static func build(_arguments: Array[String]):
 	return Cancel.new()
 
 
+static func get_help():
+	return "removes any pending commands"
+
+
 func get_text():
 	return "CANCEL"
 
