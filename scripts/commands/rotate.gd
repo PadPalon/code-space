@@ -83,7 +83,7 @@ func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
 
 func run(ship: RigidBody2D, _delta: float, stats: ShipStats):
 	var torque
-	if rotation_done > rotation_to_do * 0.5 + 1:
+	if rotation_done > rotation_to_do * 0.6:
 		torque = speed * stats.rotation_speed * -1
 	else:
 		torque = speed * stats.rotation_speed
@@ -92,23 +92,10 @@ func run(ship: RigidBody2D, _delta: float, stats: ShipStats):
 
 
 func is_finished(ship: RigidBody2D, delta: float, stats: ShipStats):
-	var current_rotation = ship.global_rotation_degrees
-
-	var max_rotation = maxf(current_rotation, previous_rotation)
-	var min_rotation = minf(current_rotation, previous_rotation)
-	var difference = max_rotation - min_rotation
-	previous_rotation = current_rotation
-	if difference > 180:
-		difference = absf(difference - 360)
+	var difference = absf(ship.angular_velocity * delta * (180 / PI))
 	rotation_done = rotation_done + difference
 
 	var rotation_reached = rotation_to_do <= rotation_done and absf(ship.angular_velocity) <= 1
 	if rotation_reached:
-		if RotationUtils.to_360(ship.global_rotation_degrees) != target_rotation:
-			rotation_done = 0
-			rotation_reached = false
-			start(ship, delta, stats)
-		else:
-			ship.global_rotation_degrees = RotationUtils.to_180(target_rotation)
-			ship.lock_rotation = true
+		ship.lock_rotation = true
 	return rotation_reached

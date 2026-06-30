@@ -4,8 +4,6 @@ extends Command
 var direction
 var distance
 
-var previous_rotation
-var target_rotation
 var speed
 var rotation_to_do = 0
 var rotation_done = 0
@@ -61,13 +59,10 @@ func get_text():
 
 
 func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
-	previous_rotation = RotationUtils.to_360(ship.global_rotation_degrees)
 	rotation_to_do = get_distance()
 	if direction == left_direction:
-		target_rotation = posmod(previous_rotation - rotation_to_do, 360)
 		speed = left_speed
 	elif direction == right_direction:
-		target_rotation = posmod(previous_rotation + rotation_to_do, 360)
 		speed = right_speed
 
 	ship.lock_rotation = false
@@ -75,22 +70,15 @@ func start(ship: RigidBody2D, _delta: float, _stats: ShipStats):
 
 func run(ship: RigidBody2D, _delta: float, stats: ShipStats):
 	var torque
-	if rotation_done > rotation_to_do * 0.5 + 1:
+	if rotation_done > rotation_to_do * 0.6:
 		torque = speed * stats.rotation_speed * -1
 	else:
 		torque = speed * stats.rotation_speed
 	ship.apply_torque(torque)
 
 
-func is_finished(ship: RigidBody2D, _delta: float, _stats: ShipStats):
-	var current_rotation = ship.global_rotation_degrees
-
-	var max_rotation = maxf(current_rotation, previous_rotation)
-	var min_rotation = minf(current_rotation, previous_rotation)
-	var difference = max_rotation - min_rotation
-	previous_rotation = current_rotation
-	if difference > 180:
-		difference = absf(difference - 360)
+func is_finished(ship: RigidBody2D, delta: float, _stats: ShipStats):
+	var difference = absf(ship.angular_velocity * delta * (180 / PI))
 	rotation_done = rotation_done + difference
 
 	var rotation_reached = rotation_to_do <= rotation_done and absf(ship.angular_velocity) <= 1
