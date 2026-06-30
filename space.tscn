@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://br0o6sg2wdw3k" path="res://scripts/command_input.gd" id="1_dlyaf"]
 [ext_resource type="Script" uid="uid://b4hityntli7fd" path="res://scripts/controlled_ship.gd" id="1_n351m"]
 [ext_resource type="Script" uid="uid://dswlwbvyutrul" path="res://scripts/command_output.gd" id="2_fu4di"]
+[ext_resource type="Script" uid="uid://hht73ficgd4p" path="res://scripts/debug_console.gd" id="3_ulv8f"]
 [ext_resource type="PackedScene" uid="uid://bbhfy8h3enf0l" path="res://debris/debris.tscn" id="4_rxlph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wi5f"]
@@ -79,6 +80,19 @@ horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 script = ExtResource("2_fu4di")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=271055356 node_paths=PackedStringArray("ship")]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 200.0
+grow_horizontal = 0
+horizontal_alignment = 2
+script = ExtResource("3_ulv8f")
+ship = NodePath("../../Ship")
 
 [node name="Ship" type="RigidBody2D" parent="." unique_id=1405959099]
 position = Vector2(100, 50)
